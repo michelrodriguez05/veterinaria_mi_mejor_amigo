@@ -3,50 +3,46 @@ CREATE DATABASE Veterinaria;
 USE Veterinaria;
 
 CREATE TABLE Dueno (
-    id_dueno INT AUTO_INCREMENT PRIMARY KEY,
-    nombre VARCHAR(100) NOT NULL,
-    apellido VARCHAR(100) NOT NULL,
-    cedula VARCHAR(20) UNIQUE NOT NULL,
-    telefono VARCHAR(20),
-    direccion VARCHAR(150)
+  id_dueno INT AUTO_INCREMENT PRIMARY KEY,
+  nombre VARCHAR(100) NOT NULL,
+  apellido VARCHAR(100) NOT NULL,
+  cedula VARCHAR(20) UNIQUE NOT NULL,
+  telefono VARCHAR(20),
+  direccion VARCHAR(150)
 );
-
 
 CREATE TABLE Mascota (
-    id_mascota INT AUTO_INCREMENT PRIMARY KEY,
-    nombre VARCHAR(50),
-    especie VARCHAR(50),
-    raza VARCHAR(50),
-    edad INT,
-    sexo ENUM('M', 'F'),
-    vacunada BOOLEAN,
-    cedula_dueno VARCHAR(20), 
-    FOREIGN KEY (cedula_dueno) REFERENCES Dueno(cedula)
+  id_mascota INT AUTO_INCREMENT PRIMARY KEY,
+  nombre VARCHAR(100) NOT NULL,
+  especie VARCHAR(50) NOT NULL,
+  raza VARCHAR(100),
+  edad INT,
+  sexo ENUM('Macho', 'Hembra'),
+  vacunada BOOLEAN,
+  id_dueno INT,
+  FOREIGN KEY (id_dueno) REFERENCES Dueno(id_dueno)
 );
-
 
 CREATE TABLE Servicio (
-    id_servicio INT AUTO_INCREMENT PRIMARY KEY,
-    nombre VARCHAR(100) UNIQUE NOT NULL, 
-    descripcion TEXT,
-    precio_base DECIMAL(10,2) NOT NULL 
+  id_servicio INT AUTO_INCREMENT PRIMARY KEY,
+  nombre VARCHAR(100) NOT NULL,
+  descripcion TEXT,
+  precio DECIMAL(10,2) NOT NULL
 );
-
 
 CREATE TABLE Visita (
-    id_visita INT AUTO_INCREMENT PRIMARY KEY,
-    fecha DATE NOT NULL, 
-    id_mascota INT NOT NULL, 
-    id_servicio INT NOT NULL, 
-    FOREIGN KEY (id_mascota) REFERENCES Mascota(id_mascota) ON UPDATE CASCADE ON DELETE CASCADE,
-    FOREIGN KEY (id_servicio) REFERENCES Servicio(id_servicio) ON UPDATE CASCADE ON DELETE RESTRICT
+  id_visita INT AUTO_INCREMENT PRIMARY KEY,
+  fecha DATE NOT NULL,
+  id_mascota INT,
+  id_servicio INT,
+  FOREIGN KEY (id_mascota) REFERENCES Mascota(id_mascota),
+  FOREIGN KEY (id_servicio) REFERENCES Servicio(id_servicio)
 );
 
-
 CREATE TABLE Tratamiento (
-    id_tratamiento INT AUTO_INCREMENT PRIMARY KEY,
-    nombre VARCHAR(100) NOT NULL, 
-    observaciones TEXT,
-    id_visita INT NOT NULL, 
-    FOREIGN KEY (id_visita) REFERENCES Visita(id_visita) ON UPDATE CASCADE ON DELETE CASCADE
+  id_tratamiento INT AUTO_INCREMENT PRIMARY KEY,
+  nombre VARCHAR(100) NOT NULL,
+  observaciones TEXT,
+  id_visita INT,
+  FOREIGN KEY (id_visita) REFERENCES Visita(id_visita)
 );
