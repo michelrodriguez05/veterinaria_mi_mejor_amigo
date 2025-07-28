@@ -50,7 +50,7 @@ Este repositorio contiene los siguientes archivos:
 
 ## 👤 Autor
 
-- **Michel Rodrigue**  
+- **Michel Rodriguez**  
   Estudiante de desarrollo de software  
   GitHub: [@michelrodriguez05](https://github.com/michelrodriguez05/veterinaria_mi_mejor_amigo)
 
